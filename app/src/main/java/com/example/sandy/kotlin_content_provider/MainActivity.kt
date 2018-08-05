@@ -39,5 +39,26 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
+        //particular contact search
+        srch.setOnClickListener({
+
+            var resolver = contentResolver
+
+            var cursor  =     resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+"=?",
+                    arrayOf(actv1.text.toString()), ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+
+            var adapter = SimpleCursorAdapter(this, R.layout.indiview,cursor,
+                    arrayOf(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                            ContactsContract.CommonDataKinds.Phone.NUMBER),
+                    intArrayOf(R.id.name,R.id.number),0)
+
+            lv1.adapter = adapter
+
+
+        })
+
+
     }
 }
